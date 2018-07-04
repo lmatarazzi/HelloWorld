@@ -1,4 +1,5 @@
 FROM anapsix/alpine-java
 LABEL maintainer="l.matarazzi@reply.eu"
-COPY /target/spring-petclinic-1.5.1.jar /home/spring-petclinic-1.5.1.jar
-CMD ["java","-jar","/home/spring-petclinic-1.5.1.jar"]
+COPY /src/hello.java /home/hello.java
+RUN javac /home/hello.java
+CMD ["java","/home/hello"]
