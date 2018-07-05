@@ -1,10 +1,12 @@
 #!groovy
 node {
+	def BatchIlias
 	// Stage 1 is the Git checkout of the source code
 	stage('Git Checkout') {
 		try {
-			// notify via slack that a build has started
-            notifyBuild('STARTED Checkout ...')
+		// notify via slack that a build has started
+                notifyBuild('STARTED Checkout ...')
+		checkout scm	
 	        notifyBuild('DONE Checkout!')		
 		} catch(e) {
             currentBuild.result = "Checkout failed"
@@ -15,8 +17,9 @@ node {
 
 	stage('Build Project') {
 		try {
-			// notify via slack that a build has started
-            notifyBuild('STARTED Build Project ...')
+		// notify via slack that a build has started
+                notifyBuild('STARTED Build Project ...')
+		BatchIlias = docker.build('BatchIlias -f ${pwd}/Dockerfile')
 	        notifyBuild('DONE Build Project!')		
 		} catch(e) {
             currentBuild.result = "Checkout failed"
