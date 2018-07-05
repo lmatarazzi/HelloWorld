@@ -58,8 +58,13 @@ node("rai-linux-clone") {
             currentBuild.result = "Checkout failed"
             notifyBuild(currentBuild.result)
             throw e
-        }
-    }
+                } finally {
+            // Success or failure, always send notifications
+            notifyBuild(currentBuild.result)
+		}
+	}
+}
+
 //Customize notify layout
 def notifyBuild(String buildStatus = 'STARTED') {
 	// build status of null means successful
