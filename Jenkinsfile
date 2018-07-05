@@ -1,5 +1,5 @@
 #!groovy
-node("rai-linux-clone") {
+node {
 	// Stage 1 is the Git checkout of the source code
 	stage('Git Checkout') {
 		try {
