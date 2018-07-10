@@ -1,5 +1,5 @@
 #!groovy
-node {
+node ('Slave') {
 	def BatchIlias
 	// Stage 1 is the Git checkout of the source code
 	stage('Git Checkout') {
