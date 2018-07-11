@@ -1,6 +1,18 @@
 #!groovy
-node ('Win-Slave') {
+node ('Slave') {
 	def BatchIlias
+	// Stage 0 is the prefetch of the source code
+		stage('Prefetch') {
+		try {
+		// notify via slack that a build has started
+                notifyBuild('STARTED Prefetcht ...')
+		//BatchIlias = docker.build('BatchIlias -f dockerfile')
+	        notifyBuild('DONE Prefetcht!')		
+		} catch(e) {
+            currentBuild.result = "Checkout failed"
+            notifyBuild(currentBuild.result)
+            throw e
+        }
 	// Stage 1 is the Git checkout of the source code
 	stage('Git Checkout') {
 		try {
