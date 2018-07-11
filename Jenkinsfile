@@ -9,10 +9,11 @@ node ('Slave') {
 		//BatchIlias = docker.build('BatchIlias -f dockerfile')
 	        notifyBuild('DONE Prefetcht!')		
 		} catch(e) {
-            currentBuild.result = "Checkout failed"
-            notifyBuild(currentBuild.result)
-            throw e
-        }
+            		currentBuild.result = "Checkout failed"
+            		notifyBuild(currentBuild.result)
+            		throw e
+            	}
+	}
 	// Stage 1 is the Git checkout of the source code
 	stage('Git Checkout') {
 		try {
